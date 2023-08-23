@@ -10,11 +10,11 @@ void _eputs(char *str)
 {
 	int i = 0;
 
-	if (str == '\0')
+	if (!str)
 		return;
-	while (*(str + i) != '\0')
+	while (str[i] != '\0')
 	{
-		_eputchar(*(str + i));
+		_eputchar(str[i]);
 		i++;
 	}
 }
@@ -75,9 +75,9 @@ int _putsfd(char *str, int fd)
 {
 	int i = 0;
 
-	if (str == '\0')
+	if (!str)
 		return (0);
-	while (*str != '\0')
+	while (*str)
 	{
 		i += _putfd(*str++, fd);
 	}

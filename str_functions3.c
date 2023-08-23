@@ -16,8 +16,7 @@ char **strtow(char *str, char *d)
 	if (!d)
 		d = " ";
 	for (i = 0; *(str + i) != '\0'; i++)
-		if ((*(str + i) != d && *(str + i + 1) == d) ||
-		    (*(str + i) != d && *(str + i + 1) != '\0') || *(str + i + 1) == d)
+		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
 			numwords++;
 	if (numwords == 0)
 		return (NULL);
@@ -26,10 +25,10 @@ char **strtow(char *str, char *d)
 		return (NULL);
 	for (i = 0, j = 0; j < numwords; j++)
 	{
-		while (*(str + i) == d)
+		while (is_delim(*(str + i), d))
 			i++;
 		k = 0;
-		while (*(str + i + k) != d && *(str + i + k))
+		while (!is_delim(*(str + i + k), d) && *(str + i + k))
 			k++;
 		str2[j] = malloc((k + 1) * sizeof(char));
 		if (!str2[j])
@@ -53,7 +52,7 @@ char **strtow(char *str, char *d)
  * @d: the delimeter
  * Return: a pointer (str2) to an array of strings, or NULL on failure
  */
-char **strtow2(char *str, char d)
+char **strtow2(char *str, char *d)
 {
 	int i, j, k, m, numwords = 0;
 	char **str2;
@@ -61,8 +60,7 @@ char **strtow2(char *str, char d)
 	if (str == NULL || *str == 0)
 		return (NULL);
 	for (i = 0; *(str + i) != '\0'; i++)
-		if ((*(str + i) != d && *(str + i + 1) == d) ||
-		    (*(str + i) != d && *(str + i + 1) != '\0') || *(str + i + 1) == d)
+		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
 			numwords++;
 	if (numwords == 0)
 		return (NULL);
@@ -71,10 +69,10 @@ char **strtow2(char *str, char d)
 		return (NULL);
 	for (i = 0, j = 0; j < numwords; j++)
 	{
-		while (*(str + i) == d)
+		while (is_delim(*(str + i), d))
 			i++;
 		k = 0;
-		while (*(str + i + k) != d && *(str + i + k))
+		while (!is_delim(*(str + i + k), d) && *(str + i + k))
 			k++;
 		str2[j] = malloc((k + 1) * sizeof(char));
 		if (!str2[j])

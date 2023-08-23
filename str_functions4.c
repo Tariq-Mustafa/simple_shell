@@ -17,10 +17,10 @@ char *_strncpy(char *arr, char *str, int n)
 		*(arr + i) = *(str + i);
 		i++;
 	}
-    	for (; i < n; i++)
-    	{
-        	*(arr + i) = '\0';
-    	}
+	for (; i < n; i++)
+	{
+		*(arr + i) = '\0';
+	}
 	return (arr);
 }
 

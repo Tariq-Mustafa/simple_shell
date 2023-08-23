@@ -16,6 +16,12 @@
 #define BUF_SIZE 1024
 #define BUF_FLUSH -1
 
+/* command chaining */
+#define CMD_NORM	0
+#define CMD_OR		1
+#define CMD_AND		2
+#define CMD_CHAIN	3
+
 /* convert_number() */
 #define CONVERT_LOWERCASE	1
 #define CONVERT_UNSIGNED	2
@@ -114,7 +120,7 @@ int _putchar(char);
 
 /* str_functions3.c */
 char **strtow(char *, char *);
-char **strtow2(char *, char);
+char **strtow2(char *, char *);
 
 /* str_functions4.c */
 char *_strncpy(char *, char *, int);
@@ -190,10 +196,29 @@ int _mycd(info_t *);
 int _myhelp(info_t *);
 int _myhistory(info_t *);
 
+/* alias_functions.c */
+int unset_alias(info_t *, char *);
+int set_alias(info_t *, char *);
+int print_alias(list_t *);
+int _myalias(info_t *);
+
 /* functions2.c */
 int is_cmd(info_t *, char *);
 char *find_path(info_t *, char *, char *);
 char *dup_chars(char *, int, int);
+
+/* chain_functions.c */
+int is_chain(info_t *, char *, size_t *);
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
+int replace_alias(info_t *);
+int replace_vars(info_t *);
+int replace_string(char **, char *);
+
+/* more_functions.c */
+ssize_t input_buf(info_t *, char **, size_t *);
+ssize_t get_input(info_t *);
+ssize_t read_buf(info_t *, char *, size_t *);
+void sigintHandler(int);
 
 /* hsh_functions.c */
 int hsh(info_t *, char **);

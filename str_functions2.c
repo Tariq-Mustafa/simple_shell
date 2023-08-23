@@ -12,30 +12,30 @@ char *starts_with(const char *str, const char *needle)
 	while (*needle != '\0')
 		if (*needle++ != *str++)
 			return (NULL);
-	return ((char*)str);
+	return ((char *)str);
 }
 
 /**
  * _strdup - duplicates a string
- * @str: the string to be duplicated
+ * @str: the string to duplicate
  *
  * Return: pointer to the duplicated string
  */
 char *_strdup(const char *str)
 {
 	int length = 0;
-	char *dup;
+	char *ret;
 
 	if (str == NULL)
 		return (NULL);
-	while (*str++ != '\0')
+	while (*str++)
 		length++;
-	dup = malloc(sizeof(char) * (length + 1));
-	if (dup == NULL)
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
 		return (NULL);
-	for (length++; length > 0; length--)
-		*(dup + length) = *--str;
-	return (dup);
+	for (length++; length--;)
+		ret[length] = *--str;
+	return (ret);
 }
 
 /**
@@ -48,21 +48,21 @@ void _puts(char *str)
 {
 	int i = 0;
 
-	if (str == NULL)
+	if (!str)
 		return;
-	while (*(str + i) != '\0')
+	while (str[i] != '\0')
 	{
-		_putchar(*(str + i));
+		_putchar(str[i]);
 		i++;
 	}
 }
 
 /**
  * _putchar - writes the character c to stdout
- * @c: The character to be printed
+ * @c: The character to print
  *
  * Return: On success 1.
- * On error, -1 is returned, and error is set appropriately by write.
+ * On error, -1 is returned, and errno is set appropriately.
  */
 int _putchar(char c)
 {
@@ -75,6 +75,6 @@ int _putchar(char c)
 		i = 0;
 	}
 	if (c != BUF_FLUSH)
-		*(buf + i++) = c;
+		buf[i++] = c;
 	return (1);
 }
