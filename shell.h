@@ -29,6 +29,10 @@
 #define HIST_FILE	".simple_shell_history"
 #define HIST_MAX	4096
 
+/* 1 if using system getline() */
+#define USE_GETLINE 0
+#define USE_STRTOK 0
+
 extern char **environ;
 
 
@@ -217,6 +221,7 @@ int replace_string(char **, char *);
 /* more_functions.c */
 ssize_t input_buf(info_t *, char **, size_t *);
 ssize_t get_input(info_t *);
+int _getline(info_t *, char **, size_t *);
 ssize_t read_buf(info_t *, char *, size_t *);
 void sigintHandler(int);
 
