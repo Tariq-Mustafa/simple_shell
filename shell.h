@@ -192,9 +192,9 @@ int renumber_history(info_t *info);
 
 /* builtin_functions.c */
 int _myexit(info_t *);
-int _mycd(info_t *);
 int _myhelp(info_t *);
 int _myhistory(info_t *);
+int _mycd(info_t *);
 
 /* alias_functions.c */
 int unset_alias(info_t *, char *);
